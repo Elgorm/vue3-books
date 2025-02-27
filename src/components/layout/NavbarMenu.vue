@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Pages } from '@/constants';
+import { Pages } from '@/constants'
 import Menubar from 'primevue/menubar'
 import { ref } from 'vue'
 

@@ -1,2 +1,9 @@
 @import "tailwindcss";
 @import "tailwindcss-primeui";
+
+
+html,
+body,
+#app {
+    height: 100%;
+}

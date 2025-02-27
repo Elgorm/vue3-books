@@ -1,3 +1,3 @@
-import AboutCard from "./AboutCard.vue";
+import AboutCard from './AboutCard.vue'
 
 export { AboutCard }

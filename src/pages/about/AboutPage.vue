@@ -1,7 +1,6 @@
 <script setup lang="ts">
+import { AboutCard } from '@/components/about'
 </script>
 <template>
-  <div>
-    Страница о себе
-  </div>
+  <AboutCard />
 </template>

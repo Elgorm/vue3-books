@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from "vue"
-import InputText from "primevue/inputtext"
-import { useBooksStore } from "@/stores/books"
+import { InputText } from 'primevue'
+import { useBooksStore } from '@/stores/books'
 
 const booksStore = useBooksStore()
 const searchQuery = ref(booksStore.searchQuery)

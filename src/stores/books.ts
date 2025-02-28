@@ -5,15 +5,16 @@ import { fetchBooks, fetchBookById } from '@/services/googleBooksApi'
 export const useBooksStore = defineStore('books', () => {
     const items = ref<any[]>([])
     const selected = ref<any | null>(null)
-    const loading = ref(false)
+    const loadingList = ref(false)
+    const loadingBook = ref(false)
     const page = ref(0)
     const searchQuery = ref('Макс Фрай')
     const hasMore = ref(true)
   
     const loadBooks = async (isNewSearch = false) => {
-      if (loading.value || !hasMore.value) return
+      if (loadingList.value || !hasMore.value) return
   
-      loading.value = true
+      loadingList.value = true
   
       if (isNewSearch) {
         items.value = []
@@ -30,28 +31,34 @@ export const useBooksStore = defineStore('books', () => {
         hasMore.value = false
       }
   
-      loading.value = false
+      loadingList.value = false
     }
   
     const loadBookById = async (bookId: string) => {
-      loading.value = true
+      loadingBook.value = true
       selected.value = await fetchBookById(bookId)
-      loading.value = false
+      loadingBook.value = false
     }
 
     const setSearchQuery = (query: string) => {
         searchQuery.value = query
     }
+
+    const clearSelected = () => {
+      selected.value = null
+    }
   
     return {
       items,
       selected,
-      loading,
+      loadingList,
+      loadingBook,
       page,
       searchQuery,
       hasMore,
       loadBooks,
       loadBookById,
       setSearchQuery,
+      clearSelected,
     }
   })

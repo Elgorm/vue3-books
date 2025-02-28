@@ -14,6 +14,12 @@ const router = createRouter({
         path: '/books',
         name: Pages.BOOKS,
         component: BooksPage,
+      },
+
+      {
+        path: '/books/:id',
+        name: Pages.BOOK_DETAIL,
+        component: BooksPage,
       }
     ],
   })

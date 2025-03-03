@@ -47,6 +47,18 @@ export const useBooksStore = defineStore('books', () => {
     const clearSelected = () => {
       selected.value = null
     }
+
+    const saveTitle = (id: string, title: string) => {
+      const idx = items.value.findIndex((x: any) => x.id === id)
+
+      if (idx !== -1) {
+        items.value[idx].volumeInfo.title = title
+      }
+    }
+
+    const setSelected = (item: any) => {
+      selected.value = item
+    }
   
     return {
       items,
@@ -60,5 +72,7 @@ export const useBooksStore = defineStore('books', () => {
       loadBookById,
       setSearchQuery,
       clearSelected,
+      setSelected,
+      saveTitle,
     }
   })

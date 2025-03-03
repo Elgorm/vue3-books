@@ -6,7 +6,5 @@ const props = withDefaults(defineProps<{
 })
 </script>
 <template>
-  <div v-if="value">
-    {{ value }}
-  </div>
+  <div v-if="value" v-dompurify-html="value" />
 </template>

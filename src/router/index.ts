@@ -1,6 +1,5 @@
 import { createWebHistory, createRouter } from 'vue-router'
 import { Pages } from '@/constants'
-import { AboutPage, BooksPage } from '@/pages'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -8,18 +7,18 @@ const router = createRouter({
       {
         path: '/',
         name: Pages.ABOUT,
-        component: AboutPage,
+        component: () => import('@/pages/about/AboutPage.vue')
       },
       {
         path: '/books',
         name: Pages.BOOKS,
-        component: BooksPage,
+        component: () => import('@/pages/books/BooksPage.vue'),
       },
 
       {
         path: '/books/:id',
         name: Pages.BOOK_DETAIL,
-        component: BooksPage,
+        component: () => import('@/pages/books/BooksPage.vue'),
       }
     ],
   })

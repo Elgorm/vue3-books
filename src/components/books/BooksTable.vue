@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, onBeforeMount, ref, watch } from 'vue'
+import { computed, onBeforeMount, ref, shallowRef, watch } from 'vue'
 import { DataTable, Column } from 'primevue'
 import { InfinityScroll } from '@/components/blocks'
 import { Pages } from '@/constants'
 import { ModalBookDetails } from '@/components/books/modal'
-import { BookCategoriesField, BooksAuthorsField} from '@/components/books'
+import { BookCategoriesField, BooksAuthorsField, ModalBookEdit } from '@/components/books'
 import { useRoute, useRouter } from 'vue-router'
 import { useBooksStore } from '@/stores'
 import { storeToRefs } from 'pinia'
@@ -20,10 +20,12 @@ withDefaults(defineProps<{
 const route = useRoute()
 const router = useRouter()
 const emit = defineEmits(['scroll-load'])
+const editSelected = ref({ id: '', title: '' })
 
 const booksStore = useBooksStore()
 const { hasMore, searchQuery } = storeToRefs(booksStore)
 const scrollBox = ref()
+const openEditModal = shallowRef(false)
 
 const isModalOpen = computed({
   get: () => !!route.params.id,
@@ -50,6 +52,12 @@ const loadBook = async() => {
   if (bookId.value) {
     await booksStore.loadBookById(bookId.value)
   }
+}
+
+const openEdit = async(data: any) => {
+    editSelected.value.id = data.id
+    editSelected.value.title = data.volumeInfo.title
+    openEditModal.value = true
 }
 
 watch(bookId, async (v: string) => {
@@ -92,6 +100,15 @@ onBeforeMount(async() => {
         </template>
       </Column>
 
+      <Column style="width: 10%; min-width: 8rem" bodyStyle="text-align:center">
+        <template #body="{ data }">
+          <div class="cursor-pointer" @click="openEdit(data)">
+            <i class="pi pi-pencil" style="font-size: 1rem"></i>
+          </div>
+          
+        </template>
+      </Column>
+
       <template #empty>
         <div class="flex h-full justify-center items-center">
           Ничего нет
@@ -102,5 +119,9 @@ onBeforeMount(async() => {
 
   <Teleport to="body">
     <ModalBookDetails v-model="isModalOpen" />
+  </Teleport>
+
+  <Teleport to="body">
+    <ModalBookEdit v-model="openEditModal" v-model:edit-selected="editSelected" /> 
   </Teleport>
 </template>

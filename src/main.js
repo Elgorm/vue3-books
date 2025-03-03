@@ -4,6 +4,7 @@ import router from './router'
 import App from './App.vue'
 import PrimeVue from 'primevue/config'
 import Aura from '@primeuix/themes/aura'
+import VueDOMPurifyHTML from 'vue-dompurify-html'
 
 import 'primeicons/primeicons.css'
 import './style.css'
@@ -23,4 +24,5 @@ createApp(App)
         }
     }
 })
+.use(VueDOMPurifyHTML)
 .mount('#app')

@@ -1,4 +1,4 @@
 import ModalBookDetails from './ModalBookDetails.vue'
-import ModalEditTitle from './ModalEditTitle.vue'
+import ModalBookEdit from './ModalBookEdit.vue'
 
-export { ModalBookDetails, ModalEditTitle }
+export { ModalBookDetails, ModalBookEdit }
